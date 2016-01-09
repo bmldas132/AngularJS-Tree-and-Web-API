@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="../js/angular.js"></script>
+    <script src="../js/app/myTreeApp.js"></script>
+    <script src="../js/Service/treeService.js"></script>
+    <script src="../js/Controller/treeController.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/_styles.css" rel="stylesheet" />
+	<meta charset="utf-8" />
+
+    <style>
+        .tree{
+            color:#0094ff;
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="treeController" ng-cloak>
+    
+    <script type="text/ng-template" id="tree_item_renderer.html">
+        <a class="tree" ng-click="Detail(data)">{{data.Name}}</a>
+        <input type="checkbox" ng-checked="data.children.length == 0 || data.children.length == undefined || data.children.length == null" />
+        <ol>
+            <li ng-repeat="data in data.children" ng-include="'tree_item_renderer.html'"></li>
+        </ol>
+    </script>
+    <div class="container">
+        <div style="margin:70px 0px;">
+            <div class="row">
+                <div class="col-sm-3">
+                    <ol class="tree jumbotron">
+                        <li ng-repeat="data in res" ng-include="'tree_item_renderer.html'">
+
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-sm-6">
+                    <div style="display:inline-block;margin-top:100px;">
+                        <table border="1">
+                            <tr>
+                                <td>Id</td>
+                                <td>Parent Id</td>
+                                <td>Name</td>
+                            </tr>
+                            <tr>
+                                <td>{{table.Id}}</td>
+                                <td>{{table.ParentId}}</td>
+                                <td>{{table.Name}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+</html>

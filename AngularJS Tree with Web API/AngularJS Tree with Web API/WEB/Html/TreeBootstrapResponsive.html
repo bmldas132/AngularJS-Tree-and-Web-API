@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/angular.js"></script>
+    <script src="../js/app/myTreeApp.js"></script>
+    <script src="../js/Service/treeService.js"></script>
+    <script src="../js/Controller/treeController.js"></script>
+
+    <style>
+        .bsTree{
+            margin-bottom: 2px;
+            font-size: 15px;
+            margin-left: 0;
+            list-style: none;
+            padding: 0;
+            margin: 0 0 10px 25px;
+        }
+        .bsTree li{
+            margin:2px;
+        }
+        .main{
+            background-color:#faf9f9;
+        }
+        .main > div{
+            text-transform: uppercase;
+            padding: 0;
+            margin:2px;
+            color: #ccc;
+            display: block;
+            border: solid 1px #4cae4c;
+        }
+        .bsTree button{
+            margin-left: 0px;
+            display: inline-block;
+            width: 30px;
+            font-weight:900;
+            font-size:20px;
+            border-style:none!important;
+            border-radius:0px!important;
+            top:0px!important;
+        }
+        
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="treeController" ng-cloak>
+    <script type="text/ng-template" id="tree_item_renderer.html">
+        <div>
+            <button ng-click="toggleIcon($event,data.children.length)" data-toggle="collapse" data-target="#collapse{{data.Id}}" ng-class="data.children.length >0?'glyphicon-plus':'glyphicon-minus'" class="panel-collapse btn btn-xs btn-success glyphicon"></button>
+            <a style="cursor:pointer;">{{data.Name}}</a>
+        </div>
+
+        <ol id="collapse{{data.Id}}" class="collapse">
+            <li ng-repeat="data in data.children" ng-include="'tree_item_renderer.html'"></li>
+        </ol>
+    </script>
+    <div class="container">
+        <h2>Tree Bootstrap</h2>
+        <div class="row">
+            <div class="col-xs-4">
+                <ul class="bsTree">
+                    <li class="main" ng-repeat="data in res" ng-include="'tree_item_renderer.html'" >
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+  
+    <!--<script>
+        (function ($) {
+            "use strict";
+
+            $(document).on('show.bs.collapse', function (e) {
+                $(this).find(".glyphicon-plus").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+            });
+            $(document).on('hide.bs.collapse', function (e) {
+                $(this).find(".glyphicon-minus").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+            });
+
+        })(jQuery);
+    </script>-->
+
+    <script>
+
+
+
+    </script>
+
+</body>
+</html>
