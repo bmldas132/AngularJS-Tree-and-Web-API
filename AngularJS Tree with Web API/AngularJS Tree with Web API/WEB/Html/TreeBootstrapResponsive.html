@@ -16,14 +16,16 @@
             font-size: 15px;
             margin-left: 0;
             list-style: none;
-            padding: 0;
+            padding: 10px;
             margin: 0 0 10px 25px;
+            background-color:#faf9f9;
+            min-height:300px;
+        }
+        .main{
+            background-color:aqua;
         }
         .bsTree li{
             margin:2px;
-        }
-        .main{
-            background-color:#faf9f9;
         }
         .main > div{
             text-transform: uppercase;
@@ -49,7 +51,7 @@
 <body ng-app="myApp" ng-controller="treeController" ng-cloak>
     <script type="text/ng-template" id="tree_item_renderer.html">
         <div>
-            <button ng-click="toggleIcon($event,data.children.length)" data-toggle="collapse" data-target="#collapse{{data.Id}}" ng-class="data.children.length >0?'glyphicon-plus':'glyphicon-minus'" class="panel-collapse btn btn-xs btn-success glyphicon"></button>
+            <button ng-click="toggleIcon($event,data.children.length)" data-toggle="collapse" data-target="#collapse{{data.Id}}" ng-class="data.children.length == 0 || data.children.length == undefined || data.children.length == null?'glyphicon-minus':'glyphicon-plus'" class="panel-collapse btn btn-xs btn-success glyphicon"></button>
             <a style="cursor:pointer;">{{data.Name}}</a>
         </div>
 

@@ -41,11 +41,22 @@ app.controller('treeController', ['$scope','$window', 'treeService', function ($
         if (childrenCount == undefined || childrenCount == 0 || childrenCount == null) {
             return
         };
-        $(event.target).toggleClass('glyphicon-minus','glyphicon-plus');
+        //alert($(event.target).attr('aria-expanded'));
+        if ($(event.target).attr('aria-expanded') === 'false' || $(event.target).attr('aria-expanded') == undefined) {
+            //alert($(event.target).attr('aria-expanded'));
+            $(event.target).removeClass('glyphicon-plus');
+            $(event.target).addClass('glyphicon-minus');
+        }
+        else if ($(event.target).attr('aria-expanded') === 'true') {
+            //alert($(event.target).attr('aria-expanded'));
+            $(event.target).removeClass('glyphicon-minus');
+            $(event.target).addClass('glyphicon-plus');
+        };
+        //$(event.target).toggleClass('glyphicon-minus', 'glyphicon-plus');
+        //console.log(event);
+        //alert($(event.target).attr('aria-expanded'));
         //$(event.target).removeClass('glyphicon-plus');
         //$(event.target).addClass('glyphicon-minus');
-        //alert(hasClass(button, 'glyphicon'));
-        //alert(hasClass(button, 'panel-collapse'));
         
     };
 }]);
