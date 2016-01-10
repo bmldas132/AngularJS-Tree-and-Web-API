@@ -14,7 +14,7 @@ namespace AngularJS_Tree_with_Web_API.Controllers
 {
     public class TablesController : ApiController
     {
-        private TreeEntities db = new TreeEntities();
+        private TreeEntities1 db = new TreeEntities1();
 
         // GET: api/Tables
         public IQueryable<Table> GetTables()
@@ -78,6 +78,7 @@ namespace AngularJS_Tree_with_Web_API.Controllers
             {
                 return BadRequest(ModelState);
             }
+            table.Id = Guid.NewGuid();
 
             db.Tables.Add(table);
 

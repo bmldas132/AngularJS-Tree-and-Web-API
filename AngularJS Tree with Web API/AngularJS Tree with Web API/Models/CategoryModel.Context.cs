@@ -13,10 +13,10 @@ namespace AngularJS_Tree_with_Web_API.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TreeEntities : DbContext
+    public partial class TreeEntities1 : DbContext
     {
-        public TreeEntities()
-            : base("name=TreeEntities")
+        public TreeEntities1()
+            : base("name=TreeEntities1")
         {
         }
     
@@ -25,6 +25,7 @@ namespace AngularJS_Tree_with_Web_API.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<CategoryFeature> CategoryFeatures { get; set; }
         public virtual DbSet<Table> Tables { get; set; }
     }
 }

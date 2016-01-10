@@ -14,9 +14,19 @@ namespace AngularJS_Tree_with_Web_API.Models
     
     public partial class Table
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Table()
+        {
+            this.CategoryFeatures = new HashSet<CategoryFeature>();
+        }
+    
         public System.Guid Id { get; set; }
         public int NumericId { get; set; }
         public System.Guid ParentId { get; set; }
         public string Name { get; set; }
+        public Nullable<bool> IsProduct { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CategoryFeature> CategoryFeatures { get; set; }
     }
 }

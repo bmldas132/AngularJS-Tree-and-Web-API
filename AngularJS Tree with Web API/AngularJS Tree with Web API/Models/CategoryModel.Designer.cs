@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\PIXELSTROKEU4\Source\Repos\AngularJS-Tree-and-Web-API\AngularJS Tree with Web API\AngularJS Tree with Web API\Models\TreeModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\PIXELSTROKEU4\Source\Repos\AngularJS-Tree-and-Web-API\AngularJS Tree with Web API\AngularJS Tree with Web API\Models\CategoryModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

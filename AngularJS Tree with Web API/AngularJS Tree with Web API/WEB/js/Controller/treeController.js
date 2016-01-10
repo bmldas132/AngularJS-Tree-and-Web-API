@@ -2,17 +2,21 @@
 
 app.controller('treeController', ['$scope','$window', 'treeService', function ($scope,$window, treeService) {
 
+    $scope.newNode = {};
+    $scope.editNode = {};
     var url = "/api/Tables";
     $scope.res = [];
 
-    treeService.GetCategory(url).then(function (data) {
-        $scope.response = data.data;
-        $scope.res = $scope.getNestedChildren($scope.response, "00000000-0000-0000-0000-000000000000");
-    }, function () {
-        $window.alert("Could not load the data.");
-    });
+    $scope.GetCategory = function () {
+        treeService.GetCategory(url).then(function (data) {
+            $scope.response = data.data;
+            $scope.res = $scope.getNestedChildren($scope.response, "00000000-0000-0000-0000-000000000000");
+        }, function () {
+            $window.alert("Could not load the data.");
+        });
+    };
 
-    
+    $scope.GetCategory();
 
     $scope.getNestedChildren = function (arr, parent) {
         var out = []
@@ -32,10 +36,6 @@ app.controller('treeController', ['$scope','$window', 'treeService', function ($
     $scope.Detail = function (data) {
         $scope.table = data;
     };
-
-    function hasClass(element, cls) {
-        return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
-    }
 
     $scope.toggleIcon = function (event, childrenCount) {
         if (childrenCount == undefined || childrenCount == 0 || childrenCount == null) {
@@ -59,4 +59,67 @@ app.controller('treeController', ['$scope','$window', 'treeService', function ($
         //$(event.target).addClass('glyphicon-minus');
         
     };
+
+    $scope.Select = function (target) {
+        $scope.selectedItem = target;
+    };
+
+    $scope.CopySelectedItem = function () {
+        $scope.editNode = {
+            Id:$scope.selectedItem.Id,
+            Name: $scope.selectedItem.Name,
+            ParentId: $scope.selectedItem.ParentId
+        };
+    };
+
+    $scope.AddNode = function () {
+        if ($scope.IsToParent == true) {
+            $scope.newNode = {
+                ParentId: "00000000-0000-0000-0000-000000000000",
+                Name: $scope.newNode.Name
+            };
+        }
+        else {
+            $scope.newNode = {
+                ParentId: $scope.selectedItem.Id,
+                Name: $scope.newNode.Name
+            };
+        };
+
+        //console.log($scope.newNode);
+        var postUrl = "/api/Tables";
+        treeService.PostCategory(postUrl,$scope.newNode).then(function () {
+            swal("Success!", "Added Successfully!", "success");
+            $scope.GetCategory();
+        }, function () {
+            swal("Failed!", "Please try again", "error");
+        });
+        
+    };
+
+    $scope.UpdateNode = function () {
+        
+        console.log($scope.newNode);
+        var updateUrl = "/api/Tables";
+        treeService.UpdateCategory(updateUrl,$scope.editNode.Id, $scope.editNode).then(function () {
+            swal("Success!", "Updated Successfully!", "success");
+            $scope.GetCategory();
+        }, function () {
+            swal("Failed!", "Please try again", "error");
+        });
+    };
+
+    $scope.DeleteNode = function () {
+
+        console.log($scope.newNode);
+        var deleteUrl = "/api/Tables";
+        treeService.DeleteCategory(deleteUrl, $scope.selectedItem.Id).then(function () {
+            swal("Success!", "Deleted Successfully!", "success");
+            $scope.GetCategory();
+        }, function () {
+            swal("Failed!", "Please try again", "error");
+        });
+
+    };
+
 }]);
